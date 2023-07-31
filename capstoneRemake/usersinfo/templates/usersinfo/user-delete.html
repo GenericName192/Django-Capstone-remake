@@ -1,0 +1,17 @@
+{% extends "base.html" %} {% block content%}{% if user.is_authenticated %}
+<!---->
+{% if role == "admin" %}
+<h3>
+  Are you sure you want to delete {{ userInfo.user.first_name }}
+  {{userInfo.user.last_name }}?
+</h3>
+<form method="post">
+  {% csrf_token %}
+  <button type="submit" class="btn btn-success">Yes</button>
+</form>
+{% else %}
+<h3>
+  Hey you're not meant to be here, go back to the
+  <a href="{% url 'home' %}">homepage</a>
+</h3>
+{% endif %} {% endif %} {% endblock %}

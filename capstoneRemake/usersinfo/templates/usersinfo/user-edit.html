@@ -1,0 +1,22 @@
+{% extends "base.html" %} {% block content%}{% if user.is_authenticated %}
+<!--  -->
+{% if role == "team lead" or role == "admin" %}
+<div class="card text">
+  <div class="card-text">
+    <div class="card-header">
+      User {{ userInfo.user.first_name }} {{ userInfo.user.last_name }} update
+      page
+    </div>
+    <form method="post">
+      {% csrf_token %} {{ form1.as_p }} {{ form2.as_p }}
+      <br />
+      <button type="submit" class="btn btn-success">update user</button>
+    </form>
+  </div>
+</div>
+{% endif %} {% else %}
+<h3>
+  Hey you're not meant to be here, go back to the
+  <a href="{% url 'home' %}">homepage</a>
+</h3>
+{% endif %} {% endblock %}

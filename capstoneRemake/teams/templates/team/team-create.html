@@ -1,0 +1,29 @@
+{% extends "base.html" %} {% block content%}{% if user.is_authenticated %}
+<!-- -->
+{% if role == "admin" or role == "team lead" %}
+<div class="card text">
+  <div class="card-text">
+    <div class="card-header">Create team page</div>
+    <form method="post">
+      <table>
+        {{form}}
+      </table>
+      {% csrf_token %}
+      <button type="submit" class="btn btn-success create-button">
+        Create team
+      </button>
+    </form>
+  </div>
+</div>
+{% else %}
+<h3>
+  Hey you're not meant to be here, go back to the
+  <a href="{% url 'home' %}">homepage</a>
+</h3>
+{% endif %} {% else %}
+
+<a class="btn btn-large" href="{% url 'login' %}">
+  Please press here to login</a
+>
+
+{% endif %} {% endblock %}

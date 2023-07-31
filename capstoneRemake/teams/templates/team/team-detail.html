@@ -1,0 +1,42 @@
+{% extends "base.html" %} {% block content%}{% if user.is_authenticated %}
+<div class="card text">
+  <div class="card-text">
+    <div class="card-header">Team {{team.name}} detail page</div>
+    <ul>
+      <li>Team ID: {{team.id}}</li>
+      <li>Team name: {{team.name}}</li>
+      <li>Team location: {{team.location}}</li>
+      <li>Team Task: {{team.location.task}}</li>
+      <li>
+        Team members:
+        <ul>
+          {% for userinfo in userinfos %}
+          <li>
+            <a href="{% url 'userDetail' userinfo.id %}" style="color: #275950">
+              {{userinfo.user.first_name}} {{userinfo.user.last_name}}
+            </a>
+          </li>
+          {% endfor %}
+        </ul>
+      </li>
+    </ul>
+    {% if team.id != 0 %}
+    <!--  -->
+    {% if role == "team lead" or role == "admin" %}
+    <a href="{% url 'teamUpdate' team.id %}"
+      ><button class="btn btn-success">Update</button></a
+    >
+    <a href="{% url 'teamDelete' team.id %}"
+      ><button class="btn btn-success">Delete</button></a
+    >
+    {% endif %} {% endif %}
+  </div>
+</div>
+
+{% else %}
+
+<a class="btn btn-large" href="{% url 'login' %}">
+  Please press here to login</a
+>
+
+{% endif %} {% endblock %}

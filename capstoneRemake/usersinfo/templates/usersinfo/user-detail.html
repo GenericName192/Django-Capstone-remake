@@ -1,0 +1,32 @@
+{% extends "base.html" %} {% block content%}
+<div
+  class="card">
+<div class="card-text">
+  <div class="card-header">Member {{ userInfo.user.first_name }} {{ userInfo.user.last_name }} detail page</h2></div>
+    <ul>
+      <li>
+        Member ID: {{userInfo.id}}
+      </li>
+      <li>
+        Member name: {{ userInfo.user.first_name }} {{ userInfo.user.last_name }}
+      </li>
+      <li>
+        Member role: {{ userInfo.role}}
+      </li>
+      <li>
+        Member start Date: {{userInfo.startDate}} 
+      </li>
+      <li>
+        Member Team: {{userInfo.team}} 
+      </li>
+      <li>
+        Member location: {{userInfo.team.location}} 
+      </li>
+    </ul>
+    {% if role == "team lead" or role == "admin" %}
+      <a href="{% url 'userUpdate' userInfo.id %}"><button class="btn btn-success">Update</button></a>
+      <a href="{% url 'userDelete' userInfo.id %}"><button class="btn btn-success">Delete</button></a>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

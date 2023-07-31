@@ -1,0 +1,48 @@
+body {
+  font-size: 18px;
+}
+
+.navbar, .container-fluid {
+  margin-bottom: 40px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+    rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+  background-color: #164734;
+}
+
+.navbar-brand {
+  margin-left: 20px;
+  text-align: center;
+  margin-top: 10px;
+  color: white;
+}
+
+.card{
+    max-width: 28rem;
+}
+
+.card-header{
+    background-color: #164734;
+    color: white;
+    margin-bottom: 10px;
+}
+
+.card-text{
+  padding: 10px;
+  height: 28rem;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+    rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+}
+
+a {
+    color: black; 
+    margin-left: 4%"
+}
+
+.create-button {
+    margin-top: 10px;
+}
+
+.page-link{
+    color: white;
+    background-color: #164734;
+}

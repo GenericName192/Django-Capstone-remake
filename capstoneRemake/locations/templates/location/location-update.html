@@ -1,0 +1,24 @@
+{% extends "base.html" %} {% block content%}{% if user.is_authenticated %}
+<!--  -->
+{% if role == "admin" %} {% if location.id != 0 %}
+<div class="card text">
+  <div class="card-text">
+    <div class="card-header">location {{location.name}} update page</div>
+    <form method="post">
+      {% csrf_token %} {{ form.as_p }}
+      <br />
+      <button type="submit" class="btn btn-success">Update location</button>
+    </form>
+  </div>
+</div>
+{% else %}
+<h3>
+  This group cannot be changed go back to the
+  <a href="{% url 'home' %}">homepage</a>
+</h3>
+{% endif %} {% else %}
+<h3>
+  Hey you're not meant to be here, go back to the
+  <a href="{% url 'home' %}">homepage</a>
+</h3>
+{% endif %} {% endif %} {% endblock %}

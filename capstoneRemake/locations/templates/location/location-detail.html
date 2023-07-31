@@ -1,0 +1,39 @@
+{% extends "base.html" %} {% block content%}{% if user.is_authenticated %}
+<div class="card">
+  <div class="card-text">
+    <div class="card-header">Location {{location.name}} detail page</div>
+    <ul>
+      <li>Location ID: {{location.id}}</li>
+      <li>Location name: {{location.name}}</li>
+      <li>Location task: {{location.task}}</li>
+      <li>
+        Location teams:
+        <ul>
+          {% for team in teams %}
+          <li>
+            <a href="{% url 'teamDetail' team.id %}"> {{ team.name }} </a>
+          </li>
+          {% endfor %}
+        </ul>
+      </li>
+    </ul>
+
+    {% if location.id != 0 %}
+    <!--  -->
+    {% if role == "team lead" or role == "admin" %}
+    <a href="{% url 'locationUpdate' location.id %}"
+      ><button class="btn btn-success">Update</button></a
+    >
+    <a href="{% url 'locationDelete' location.id %}"
+      ><button class="btn btn-success">Delete</button></a
+    >
+    {% endif %} {% endif %}
+  </div>
+</div>
+{% else %}
+
+<a class="btn btn-large" href="{% url 'login' %}">
+  Please press here to login</a
+>
+
+{% endif %} {% endblock %}

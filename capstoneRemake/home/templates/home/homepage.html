@@ -1,0 +1,142 @@
+{% extends "base.html" %} {% block content %} {% if user.is_authenticated %}
+<div class="row">
+  <div class="col">
+    <div class="card">
+      <div class="card-text">
+        <div class="card-header">Members</div>
+        {% if user.userInfo.role == "team lead" or user.userInfo.role == admin%}
+        <!--  -->
+        <strong>
+          <a href="{% url 'registerUser' %}">Create new member</a></strong
+        >
+        {% else %}
+        <strong> Member list</strong>
+        {% endif %}
+        <ul>
+          {% for userInfo in userInfos %}
+          <li>
+            <a href="{% url 'userDetail' userInfo.id %}">
+              {{ userInfo.user.first_name }} {{ userInfo.user.last_name }}
+            </a>
+          </li>
+          {% endfor %}
+        </ul>
+        <!-- userInfos Paganation stuff -->
+        <nav>
+          <ul
+            class="pagination justify-content-end"
+            style="position: absolute; bottom: 0"
+          >
+            {% if userInfos.has_previous %}
+            <li class="page-item">
+              <a href="?mPage=1" class="page-link">&laquo First</a>
+            </li>
+            <li class="page-item">
+              <a
+                href="?mPage={{ userInfos.previous_page_number }}"
+                class="page-link"
+              >
+                Previous</a
+              >
+            </li>
+            {% endif %}
+            <li class="page-item disabled">
+              <a class="page-link"
+                >Page {{userInfos.number}} of
+                {{userInfos.paginator.num_pages}}</a
+              >
+            </li>
+            {% if userInfos.has_next %}
+            <li class="page-item">
+              <a
+                href="?mPage={{ userInfos.next_page_number }}"
+                class="page-link"
+                >Next</a
+              >
+            </li>
+            <li class="page-item">
+              <a
+                href="?mPage={{ userInfos.paginator.num_pages }}"
+                class="page-link"
+                >Last &raquo</a
+              >
+            </li>
+            {% endif %}
+          </ul>
+        </nav>
+        <!-- Members paganation stuff end -->
+      </div>
+    </div>
+  </div>
+  <div class="col">
+    <div class="card">
+      <div class="card-text">
+        <div class="card-header">Teams</div>
+        <strong><a href="{% url 'teamCreate' %}">Create new team</a> </strong>
+        <ul>
+          {% for team in teams %}
+          <li>
+            <a href="{% url 'teamDetail' team.id %}"> {{ team.name }} </a>
+          </li>
+          {% endfor %}
+        </ul>
+        <!-- Teams paganation stuff -->
+        <nav>
+          <ul
+            class="pagination justify-content-end"
+            style="position: absolute; bottom: 0"
+          >
+            {% if teams.has_previous %}
+            <li class="page-item">
+              <a href="?tPage=1" class="page-link">&laquo First</a>
+            </li>
+            <li class="page-item">
+              <a
+                href="?tPage={{ teams.previous_page_number }}"
+                class="page-link"
+              >
+                Previous</a
+              >
+            </li>
+            {% endif %}
+            <li class="page-item disabled">
+              <a class="page-link"
+                >Page {{teams.number}} of {{teams.paginator.num_pages}}</a
+              >
+            </li>
+            {% if teams.has_next %}
+            <li class="page-item">
+              <a href="?tPage={{ teams.next_page_number }}" class="page-link"
+                >Next</a
+              >
+            </li>
+            <li class="page-item">
+              <a href="?tPage={{ teams.paginator.num_pages }}" class="page-link"
+                >Last &raquo</a
+              >
+            </li>
+            {% endif %}
+          </ul>
+        </nav>
+        <!-- Teams paganation stuff end -->
+      </div>
+    </div>
+  </div>
+  <div class="col">
+    <div class="card">
+      <div class="card-text">
+        <div class="card-header">Locations</div>
+        <strong>
+          <a href="{% url 'locations' %}">Views locations</a>
+        </strong>
+      </div>
+    </div>
+  </div>
+</div>
+{% else %}
+
+<a class="btn btn-large" href="{% url 'login' %}">
+  Please press here to login</a
+>
+
+{% endif %} {% endblock %}
