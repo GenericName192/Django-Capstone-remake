@@ -4,19 +4,15 @@
     <div class="card">
       <div class="card-text">
         <div class="card-header">Members</div>
-        {% if user.userInfo.role == "team lead" or user.userInfo.role == admin%}
-        <!--  -->
-        <strong>
-          <a href="{% url 'registerUser' %}">Create new member</a></strong
-        >
-        {% else %}
-        <strong> Member list</strong>
-        {% endif %}
+        <form>
+          <input type="text" placeholder="Search.." name="searchUser" />
+          <button type="submit">Submit</button>
+        </form>
         <ul>
           {% for userInfo in userInfos %}
           <li>
             <a href="{% url 'userDetail' userInfo.id %}">
-              {{ userInfo.user.first_name }} {{ userInfo.user.last_name }}
+              {{ userInfo.first_name }} {{ userInfo.last_name }}
             </a>
           </li>
           {% endfor %}
@@ -72,7 +68,10 @@
     <div class="card">
       <div class="card-text">
         <div class="card-header">Teams</div>
-        <strong><a href="{% url 'teamCreate' %}">Create new team</a> </strong>
+        <form>
+          <input type="text" placeholder="Search.." name="searchTeam" />
+          <button type="submit">Submit</button>
+        </form>
         <ul>
           {% for team in teams %}
           <li>

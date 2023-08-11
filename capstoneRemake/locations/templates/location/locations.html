@@ -2,6 +2,10 @@
 <div class="card">
   <div class="card-text">
     <div class="card-header">Locations</div>
+        <form>
+          <input type="text" placeholder="Search.." name="searchLocation" />
+          <button type="submit">Submit</button>
+        </form>
       <ul>
         {% for location in locations %}
         <li>
