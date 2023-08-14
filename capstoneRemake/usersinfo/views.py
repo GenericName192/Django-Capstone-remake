@@ -104,7 +104,7 @@ def userPing(request, id):
         "", #  From email
         [emailTo] # To email
     )
-    messages.success(request, ("Email sent"))
+    messages.success(request, ("Ping sent"))
     return redirect("home")
 
 
