@@ -18,14 +18,8 @@ from home.views import isValidQueryparam
 
 
 def locations(request): # view all locations (may have to have this twice)
-        
-    # Creates a list of all locations and then filters them by whatever is in the search bar
-    locationList = Location.objects.all().order_by("name")
-    locationContainsQuery = request.GET.get('searchLocation')
-    if isValidQueryparam(locationContainsQuery):
-        locationList = locationList.filter(name__icontains=locationContainsQuery)
 
-    p = Paginator(locationList, 5)
+    p = Paginator( Location.objects.all().order_by("name"), 5)
     page = request.GET.get("page")
     locations = p.get_page(page)
     return render(request, "location/locations.html", {"locations": locations})
