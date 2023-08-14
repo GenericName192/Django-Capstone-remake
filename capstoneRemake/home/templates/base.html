@@ -21,7 +21,7 @@
             <a class="navbar-brand" href="{% url 'locations' %}" >View Locations</a>
             {% if user.userinfo.role == "team lead" or user.userinfo.role == "admin" %}
             <a class="navbar-brand" href="{% url 'teamCreate' %}" >Create New Team</a>
-            <a class="navbar-brand" href="{% url 'registerUser' %}">Create User</a></li>
+            <a class="navbar-brand" href="{% url 'userRegister' %}">Create User</a></li>
             {% endif %}
             {% if user.userinfo.role == "admin" %}
             <a class="navbar-brand" href="{% url 'locationCreate' %}">Create Locations</a></li>

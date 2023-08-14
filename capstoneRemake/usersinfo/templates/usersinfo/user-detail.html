@@ -26,6 +26,7 @@
     {% if role == "team lead" or role == "admin" %}
       <a href="{% url 'userUpdate' userInfo.id %}"><button class="btn btn-success">Update</button></a>
       <a href="{% url 'userDelete' userInfo.id %}"><button class="btn btn-success">Delete</button></a>
+      <a href="{% url 'userPing' userInfo.id %}"><button class="btn btn-success">Ping</button></a>
     {% endif %}
   </div>
 </div>

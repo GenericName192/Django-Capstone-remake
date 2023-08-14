@@ -4,6 +4,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from .models import UserInfo, User
 from django.forms import modelform_factory
+from django.core.mail import send_mail
 
 # team leads should not be able to change roles
 userInfoFormTeamLead = modelform_factory(UserInfo, exclude=["role", "user"])
@@ -14,7 +15,7 @@ userInfoFormAdmin = modelform_factory(UserInfo, exclude=["user"])
 userDetails = modelform_factory(User, exclude=["id", "password", "is_superuser", "username", "email", "is_staff", "date_joined", "last_login", "groups", "user_permissions", "is_active"])
 
 # Create your views here.
-def registerUser(request):
+def userRegister(request):
     if getUserRole(request.user.id) == "admin" or getUserRole(request.user.id) == "team lead":
         form = UserCreateForm()
         if request.method == "POST":
@@ -25,7 +26,7 @@ def registerUser(request):
                 return redirect("home")
             
             else:
-                return render(request, "./usersinfo/register-user.html", {"form": form})
+                return render(request, "./usersinfo/user-register.html", {"form": form})
         else:
             return render(request, "./usersinfo/user-register.html", {"form": form})
     else:
@@ -94,6 +95,20 @@ def userDelete(request, id):
                                                           "role" : role})
 
 
+def userPing(request, id):
+    user = get_object_or_404(User, pk=id)
+    emailTo = user.email
+    send_mail(
+        "ping", # subject
+        "You have been pinged", #the email
+        "", #  From email
+        [emailTo] # To email
+    )
+    messages.success(request, ("Email sent"))
+    return redirect("home")
+
+
 def getUserRole(userId):
     userRole = get_object_or_404(UserInfo, pk=userId).role
     return userRole
+
